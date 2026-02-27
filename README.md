@@ -1,8 +1,6 @@
-# Claude Code Marketing Kit
+# Claude Code Starter
 
-43 marketing skills for Claude Code — strategy, copywriting, SEO, CRO, analytics, and more.
-
-Describe your client once. Every skill remembers the context. No repeating yourself.
+A pre-configured Claude Code project to get you productive fast. Includes 20 skills for voice/audio, strategic analysis, opportunity evaluation, and product development — plus an interactive getting-started guide.
 
 ## Quick Start
 
@@ -17,128 +15,89 @@ You'll need an Anthropic API key. Get one at [console.anthropic.com](https://con
 ### 2. Open This Project
 
 ```bash
-cd claude-code-marketing-kit
+cd claude-code-starter
 claude
 ```
 
-Claude Code automatically detects the `.claude/` folder and loads all 43 skills.
+Claude Code automatically detects the `.claude/` folder and loads all skills.
 
 ### 3. Try It Out
 
 ```
-> Set up a client brief for [client name]
-> Run an SEO audit on example.com
-> What content should we create for [client]?
-> Write a LinkedIn post about why fractional marketing works
-> Analyse the competitors for [client]
+> Transcribe this meeting recording
+> Analyse this transcript and give me a strategic briefing
+> I have a new business idea — help me evaluate it
+> Map out the competitors in [market]
+> Score this opportunity — should I pursue it?
 ```
 
-## How It Works
-
-### The Client Brief System
-
-The **Client Brief** is the foundation. Set up a client once, and every skill automatically knows the context.
-
-1. Run `/client-brief` and answer the questions about the client
-2. It creates a `product-marketing-context.md` file
-3. **All other skills read this file** before giving advice — no need to repeat yourself
-
-### Multiple Clients
-
-Each client gets their own context file in `.claude/clients/`. Switch clients by telling Claude "I'm working on [client name]" and it loads the right brief.
-
-## All 43 Skills
-
-### Foundation & Strategy
-
-| Skill | What It Does |
-|-------|-------------|
-| `/client-brief` | Document a client's brand, audience, and marketing context — the foundation all other skills read |
-| `/product-marketing-context` | Create or update the shared product marketing context document |
-| `/competitor-analysis` | Research and benchmark against competitors to find positioning opportunities |
-| `/competitive-intel` | Fortnightly competitive gap analysis — Signal vs Noise classification, Triangulation Protocol, gap matrix, emailed report |
-| `/marketing-ideas` | Generate ideas from a library of 139 proven marketing approaches |
-| `/marketing-psychology` | Apply psychological principles and behavioural science to marketing |
-| `/pricing-strategy` | Design pricing tiers, packaging, and monetisation strategy |
-| `/launch-strategy` | Plan product launches, feature announcements, and go-to-market strategies |
-| `/referral-program` | Design referral programs, affiliate programs, and word-of-mouth loops |
-| `/free-tool-strategy` | Plan free marketing tools (calculators, generators) for lead gen and SEO |
-
-### Content & Copywriting
-
-| Skill | What It Does |
-|-------|-------------|
-| `/content-strategy` | Plan what content to create, build topic clusters, prioritise by impact |
-| `/copywriting` | Write or improve copy for any asset — blog posts, landing pages, emails, ads |
-| `/copy-editing` | Review and polish existing marketing copy through systematic multi-pass editing |
-| `/email-sequence` | Create email drip campaigns, welcome sequences, and lifecycle automations |
-| `/social-content` | Create content for LinkedIn, Twitter/X, Instagram, TikTok, and other platforms |
-| `/paid-ads` | Build paid ad campaigns on Google, Meta, LinkedIn — copy, targeting, and optimisation |
-
-### SEO
-
-| Skill | What It Does |
-|-------|-------------|
-| `/seo-audit` | Full technical + on-page SEO audit with prioritised fix list |
-| `/seo-plan` | Strategic SEO planning with industry templates and implementation roadmaps |
-| `/seo-page` | Deep single-page analysis — on-page elements, meta tags, schema, images, performance |
-| `/seo-content` | Content quality and E-E-A-T analysis with AI citation readiness |
-| `/seo-technical` | Technical SEO audit across 8 categories (crawlability, indexability, security, etc.) |
-| `/seo-competitor-pages` | Generate "X vs Y" and "alternatives to X" comparison pages |
-| `/seo-geo` | Optimise for AI Overviews, ChatGPT search, Perplexity, and other AI search engines |
-| `/seo-hreflang` | Audit and generate hreflang tags for international/multilingual SEO |
-| `/seo-images` | Optimise images for SEO — alt text, file names, compression, lazy loading |
-| `/seo-programmatic` | Build programmatic SEO pages at scale from data templates |
-| `/seo-schema` | Detect, validate, and generate Schema.org structured data (JSON-LD) |
-| `/seo-sitemap` | Analyse existing XML sitemaps or generate new ones |
-| `/programmatic-seo` | Create SEO-driven pages at scale — location pages, integrations, comparisons |
-| `/schema-markup` | Add, fix, or optimise JSON-LD schema markup for rich search results |
-| `/competitor-alternatives` | Build competitor comparison and alternative pages for SEO and sales enablement |
-
-### Conversion Rate Optimisation (CRO)
-
-| Skill | What It Does |
-|-------|-------------|
-| `/page-cro` | Optimise any marketing page (homepage, landing, pricing) for better conversions |
-| `/signup-flow-cro` | Reduce drop-off in signup, registration, and free trial activation flows |
-| `/onboarding-cro` | Improve post-signup onboarding, activation, and time-to-value |
-| `/paywall-upgrade-cro` | Optimise in-app paywalls, upgrade screens, and freemium-to-paid moments |
-| `/form-cro` | Improve completion rates on lead capture, contact, and demo request forms |
-| `/popup-cro` | Create and optimise popups, modals, exit-intent overlays, and banners |
-| `/ab-test-setup` | Design statistically valid A/B tests with clear hypotheses and success metrics |
-
-### Analytics & Measurement
-
-| Skill | What It Does |
-|-------|-------------|
-| `/analytics-tracking` | Set up and audit GA4, GTM, event tracking, UTM parameters, and tracking plans |
+## Included Skills
 
 ### Voice & Audio
 
 | Skill | What It Does |
 |-------|-------------|
 | `/voice-to-text` | Transcribe audio/video files to text with speaker identification |
-| `/voice-briefing` | Turn a meeting transcript or document into a spoken audio briefing |
+| `/text-to-voice` | Convert any text file to MP3 using local TTS (Kokoro, Orpheus, or Coqui XTTS v2) |
+| `/voice-briefing` | Turn a meeting transcript into a spoken audio briefing |
 
-### Utility
+### Strategic Analysis
 
 | Skill | What It Does |
 |-------|-------------|
-| `/find-skills` | Search for available skills when you want to extend capabilities |
-| `/bmad` | BMAD Method for structured product development workflows |
+| `/strategic-analysis` | Analyse meetings or documents with full project context — grounded in actual capabilities and competitive landscape |
+| `/competitive-intel` | Competitive gap analysis — signal vs noise classification, gap matrix, actionable report |
 
-## Recommended Workflow for a New Client
+### Opportunity Evaluation
 
-1. **Document** — `/client-brief` to capture who they are, what they do, who they serve
-2. **Research** — `/competitor-analysis` to understand the competitive landscape
-3. **Audit** — `/seo-audit` to diagnose their current website
-4. **Plan** — `/content-strategy` to decide what content to create
-5. **Write** — `/copywriting` to produce the actual content
-6. **Optimise** — `/page-cro` to improve conversions on key pages
-7. **Enhance** — `/schema-markup` to add structured data for better search visibility
-8. **Measure** — `/analytics-tracking` to set up proper tracking
-9. **Launch** — `/launch-strategy` when you're ready to go live
-10. **Grow** — `/email-sequence`, `/social-content`, `/paid-ads` to drive traffic
+| Skill | What It Does |
+|-------|-------------|
+| `/opportunity-brief` | Capture and document a new business opportunity in a structured format |
+| `/market-research` | Size the market, find demand signals, check trends |
+| `/competitor-landscape` | Map existing players in a market to assess room for entry |
+| `/strategy-session` | Brainstorm go-to-market, differentiation, blue ocean thinking |
+| `/due-diligence` | Vet people, financials, legal, and technical feasibility |
+| `/viability-assessment` | Score the opportunity across 8 dimensions and make the call |
+
+### Product Development (BMAD)
+
+| Skill | What It Does |
+|-------|-------------|
+| `/bmad` | Structured product development workflows with specialised AI agents |
+
+BMAD includes agents for: Business Analyst, Product Manager, System Architect, UX Designer, Scrum Master, Developer, and Creative Intelligence.
+
+### Commands
+
+| Command | What It Does |
+|---------|-------------|
+| `/new-idea` | Scaffold a new idea directory with all the right files |
+
+## Evaluating a New Idea
+
+The opportunity evaluation skills work as a pipeline:
+
+1. `/new-idea` — Scaffold a directory for the idea
+2. `/opportunity-brief` — Capture what you know: pitch, model, people, risks
+3. `/market-research` — Size the market, find demand signals, check trends
+4. `/competitor-landscape` — Map existing players, find gaps
+5. `/strategy-session` — Brainstorm go-to-market, differentiation
+6. `/due-diligence` — Vet people, financials, legal, technical feasibility
+7. `/viability-assessment` — Score the opportunity and make the call
+
+## Adding More Skills
+
+This is a starter — you can add any skills you need. Browse and install from the open skills ecosystem:
+
+```
+npx skills find marketing
+npx skills find seo
+npx skills find cloudflare
+```
+
+Browse available skills at [skills.sh](https://skills.sh/)
+
+Or create your own: add a folder in `.claude/skills/` with a `SKILL.md` file.
 
 ## Useful Claude Code Basics
 
@@ -160,39 +119,33 @@ Each client gets their own context file in `.claude/clients/`. Switch clients by
 
 ## Permissions
 
-The kit ships with a `settings.local.json` that pre-approves common tools (file editing, web search, bash). It also includes permissions for Google Search Console and GA4 MCP servers — if you have those set up, they work automatically with the SEO and analytics skills.
-
-## Optional Add-on Skills
-
-This kit focuses on marketing. If you also want development skills (Cloudflare Workers, Vercel, accessibility auditing, web performance, etc.), you can install them from the open skills ecosystem:
-
-```
-npx skills find cloudflare
-npx skills find vercel
-npx skills find accessibility
-```
-
-Browse available skills at [skills.sh](https://skills.sh/)
+The project ships with a `settings.local.json` that pre-approves common tools (file editing, web search, bash). It also includes permissions for Google Search Console and GA4 MCP servers — if you have those set up, they work automatically.
 
 ## File Structure
 
 ```
-claude-code-marketing-kit/
-├── README.md                          ← You are here
-├── guide.html                         ← Interactive getting started guide
+claude-code-starter/
+├── README.md                      ← You are here
+├── guide.html                     ← Interactive getting started guide
 ├── .claude/
-│   ├── CLAUDE.md                      ← Project instructions (Claude reads this automatically)
-│   ├── settings.local.json            ← Permissions and configuration
-│   ├── product-marketing-context.md   ← Active client brief (created by /client-brief)
-│   ├── clients/                       ← Client briefs (one per client)
+│   ├── CLAUDE.md                  ← Project instructions (Claude reads this automatically)
+│   ├── settings.local.json        ← Permissions and configuration
 │   ├── commands/
-│   │   └── bmad/                      ← BMAD product development commands
-│   └── skills/                        ← All 43 marketing skills
-│       ├── client-brief/
-│       ├── copywriting/
-│       ├── seo-audit/
-│       ├── page-cro/
-│       └── ... (38 more)
+│   │   ├── new-idea.md            ← /new-idea command
+│   │   └── bmad/                  ← BMAD product development commands
+│   └── skills/
+│       ├── voice-to-text/         ← Audio/video transcription
+│       ├── text-to-voice/         ← Text to speech
+│       ├── voice-briefing/        ← Audio briefings
+│       ├── strategic-analysis/    ← Meeting/document analysis
+│       ├── competitive-intel/     ← Competitive gap analysis
+│       ├── opportunity-brief/     ← Capture business opportunities
+│       ├── market-research/       ← Market sizing and trends
+│       ├── competitor-landscape/  ← Map competitors
+│       ├── strategy-session/      ← Brainstorm and strategise
+│       ├── due-diligence/         ← Vet opportunities
+│       ├── viability-assessment/  ← Score and decide
+│       └── bmad/                  ← Product development agents
 ```
 
 ## Need Help?
@@ -202,7 +155,7 @@ claude-code-marketing-kit/
 
 ## Credits
 
-This kit includes the [BMAD Method](https://github.com/bmad-code-org/BMAD-METHOD) skills and commands for structured product development workflows. BMAD is MIT licensed, copyright (c) 2025 BMad Code, LLC.
+This project includes the [BMAD Method](https://github.com/bmad-code-org/BMAD-METHOD) for structured product development workflows. BMAD is MIT licensed, copyright (c) 2025 BMad Code, LLC.
 
 ## License
 
