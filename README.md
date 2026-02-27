@@ -1,6 +1,6 @@
 # Claude Code Marketing Kit
 
-42 marketing skills for Claude Code — strategy, copywriting, SEO, CRO, analytics, and more.
+43 marketing skills for Claude Code — strategy, copywriting, SEO, CRO, analytics, and more.
 
 Describe your client once. Every skill remembers the context. No repeating yourself.
 
@@ -21,7 +21,7 @@ cd claude-code-marketing-kit
 claude
 ```
 
-Claude Code automatically detects the `.claude/` folder and loads all 42 skills.
+Claude Code automatically detects the `.claude/` folder and loads all 43 skills.
 
 ### 3. Try It Out
 
@@ -47,7 +47,7 @@ The **Client Brief** is the foundation. Set up a client once, and every skill au
 
 Each client gets their own context file in `.claude/clients/`. Switch clients by telling Claude "I'm working on [client name]" and it loads the right brief.
 
-## All 42 Skills
+## All 43 Skills
 
 ### Foundation & Strategy
 
@@ -56,6 +56,7 @@ Each client gets their own context file in `.claude/clients/`. Switch clients by
 | `/client-brief` | Document a client's brand, audience, and marketing context — the foundation all other skills read |
 | `/product-marketing-context` | Create or update the shared product marketing context document |
 | `/competitor-analysis` | Research and benchmark against competitors to find positioning opportunities |
+| `/competitive-intel` | Fortnightly competitive gap analysis — Signal vs Noise classification, Triangulation Protocol, gap matrix, emailed report |
 | `/marketing-ideas` | Generate ideas from a library of 139 proven marketing approaches |
 | `/marketing-psychology` | Apply psychological principles and behavioural science to marketing |
 | `/pricing-strategy` | Design pricing tiers, packaging, and monetisation strategy |
@@ -186,7 +187,7 @@ claude-code-marketing-kit/
 │   ├── clients/                       ← Client briefs (one per client)
 │   ├── commands/
 │   │   └── bmad/                      ← BMAD product development commands
-│   └── skills/                        ← All 42 marketing skills
+│   └── skills/                        ← All 43 marketing skills
 │       ├── client-brief/
 │       ├── copywriting/
 │       ├── seo-audit/
