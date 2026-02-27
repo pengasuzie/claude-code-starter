@@ -1,0 +1,1697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Getting Started — Your Marketing Toolkit</title>
+  <style>
+    :root {
+      --bg: #f8f9fb;
+      --surface: #ffffff;
+      --surface-2: #f0f1f5;
+      --border: #e2e4ea;
+      --text: #1a1d27;
+      --text-muted: #5f6478;
+      --accent: #5b52e0;
+      --accent-soft: rgba(91, 82, 224, 0.1);
+      --green: #0d9668;
+      --green-soft: rgba(13, 150, 104, 0.1);
+      --amber: #b45309;
+      --amber-soft: rgba(180, 83, 9, 0.1);
+      --pink: #c2185b;
+      --pink-soft: rgba(194, 24, 91, 0.1);
+      --blue: #2563eb;
+      --blue-soft: rgba(37, 99, 235, 0.1);
+      --red: #dc2626;
+      --red-soft: rgba(220, 38, 38, 0.1);
+      --radius: 12px;
+      --sidebar-w: 240px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .layout { display: flex; min-height: 100vh; }
+
+    /* Sidebar */
+    .sidebar {
+      width: var(--sidebar-w);
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      padding: 32px 0;
+      overflow-y: auto;
+      z-index: 100;
+    }
+
+    .sidebar-logo { padding: 0 24px; margin-bottom: 32px; }
+    .sidebar-logo h2 { font-size: 15px; font-weight: 700; color: var(--text); line-height: 1.3; }
+    .sidebar-logo p { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+    .sidebar nav { display: flex; flex-direction: column; gap: 2px; }
+
+    .sidebar nav a {
+      display: flex; align-items: center; gap: 10px;
+      padding: 9px 24px; font-size: 13px; color: var(--text-muted);
+      text-decoration: none; transition: all 0.15s; border-left: 3px solid transparent;
+    }
+    .sidebar nav a:hover { color: var(--text); background: var(--surface-2); }
+    .sidebar nav a.active { color: var(--accent); border-left-color: var(--accent); background: var(--accent-soft); font-weight: 600; }
+    .sidebar nav a .nav-icon { font-size: 15px; width: 20px; text-align: center; flex-shrink: 0; }
+    .sidebar nav .nav-divider { height: 1px; background: var(--border); margin: 12px 24px; }
+
+    /* Main */
+    .main { margin-left: var(--sidebar-w); flex: 1; max-width: 780px; padding: 48px 48px 80px; }
+
+    /* Hero */
+    .hero { margin-bottom: 56px; }
+    .hero-wave { font-size: 40px; display: block; margin-bottom: 16px; }
+    .hero h1 { font-size: 36px; font-weight: 700; line-height: 1.2; margin-bottom: 12px; background: linear-gradient(135deg, #1a1d27 0%, #5b52e0 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero p { font-size: 17px; color: var(--text-muted); max-width: 560px; line-height: 1.7; }
+    .hero p strong { color: var(--text); }
+
+    /* Sections */
+    section { scroll-margin-top: 32px; margin-bottom: 56px; }
+    section h2 { font-size: 24px; font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; gap: 10px; }
+    section h2 .section-icon { font-size: 22px; }
+    section > .lead { color: var(--text-muted); font-size: 15px; margin-bottom: 24px; max-width: 600px; }
+
+    /* Cards */
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; margin-bottom: 12px; }
+    .card h3 { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+    .card p, .card li { color: var(--text-muted); font-size: 14px; }
+    .card ul { margin-top: 8px; padding-left: 20px; }
+    .card li { margin-bottom: 4px; }
+
+    /* Setup steps */
+    .setup-steps { display: flex; flex-direction: column; gap: 16px; }
+    .setup-step { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; display: flex; gap: 16px; align-items: flex-start; }
+    .setup-step .step-badge { width: 32px; height: 32px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+    .setup-step h3 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+    .setup-step p { font-size: 14px; color: var(--text-muted); }
+
+    /* Terminal */
+    .terminal { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin: 16px 0; }
+    .terminal-header { display: flex; align-items: center; padding: 10px 14px; background: var(--surface); border-bottom: 1px solid var(--border); gap: 6px; }
+    .terminal-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .terminal-dot.red { background: #ff5f57; }
+    .terminal-dot.yellow { background: #febc2e; }
+    .terminal-dot.green { background: #28c840; }
+    .terminal-title { flex: 1; text-align: center; font-size: 12px; color: var(--text-muted); }
+    .terminal-body { padding: 16px 20px; font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace; font-size: 13px; line-height: 1.9; }
+    .terminal-body .prompt { color: var(--accent); user-select: none; }
+    .terminal-body .comment { color: var(--text-muted); }
+    .terminal-body .cmd { color: var(--green); }
+
+    /* Tips */
+    .tip { border-radius: var(--radius); padding: 16px 20px; margin: 16px 0; display: flex; gap: 12px; font-size: 14px; align-items: flex-start; }
+    .tip-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+    .tip-content { color: var(--text); }
+    .tip-content strong { font-weight: 600; }
+    .tip-blue { background: var(--blue-soft); border: 1px solid rgba(96, 165, 250, 0.2); }
+    .tip-blue strong { color: var(--blue); }
+    .tip-green { background: var(--green-soft); border: 1px solid rgba(52, 211, 153, 0.2); }
+    .tip-green strong { color: var(--green); }
+    .tip-amber { background: var(--amber-soft); border: 1px solid rgba(251, 191, 36, 0.2); }
+    .tip-amber strong { color: var(--amber); }
+
+    /* Skill grid */
+    .skill-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .skill-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; transition: border-color 0.2s; }
+    .skill-card:hover { border-color: var(--accent); }
+    .skill-card .skill-name { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 13px; color: var(--accent); margin-bottom: 4px; }
+    .skill-card .skill-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+    .skill-card .skill-highlight { color: var(--amber); font-weight: 600; }
+
+    /* Conversation */
+    .convo { margin: 20px 0; }
+    .convo-msg { display: flex; gap: 10px; margin-bottom: 12px; }
+    .convo-avatar { width: 28px; height: 28px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+    .convo-avatar.you { background: var(--accent-soft); color: var(--accent); }
+    .convo-avatar.ai { background: var(--green-soft); color: var(--green); }
+    .convo-bubble { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; font-size: 13px; line-height: 1.6; max-width: 520px; }
+    .convo-bubble.ai-bubble { background: var(--surface-2); }
+
+    /* Flow */
+    .flow { display: flex; align-items: stretch; gap: 0; margin: 24px 0; flex-wrap: wrap; justify-content: center; }
+    .flow-step { display: flex; flex-direction: column; align-items: center; text-align: center; flex: 1; min-width: 90px; max-width: 120px; position: relative; }
+    .flow-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 18px; margin-bottom: 8px; position: relative; z-index: 1; }
+    .flow-step:not(:last-child)::after { content: ''; position: absolute; top: 22px; left: calc(50% + 26px); width: calc(100% - 48px); height: 2px; background: var(--border); }
+    .flow-label { font-size: 11px; font-weight: 600; color: var(--text-muted); line-height: 1.3; }
+
+    /* Checklist */
+    .checklist { list-style: none; margin: 16px 0; }
+    .checklist li { padding: 10px 0 10px 32px; position: relative; color: var(--text-muted); font-size: 14px; border-bottom: 1px solid var(--border); }
+    .checklist li:last-child { border-bottom: none; }
+    .checklist li::before { content: ''; position: absolute; left: 0; top: 13px; width: 16px; height: 16px; border-radius: 4px; border: 2px solid var(--border); }
+
+    /* Expandable */
+    .expand-list { display: flex; flex-direction: column; gap: 6px; }
+    .expand-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: border-color 0.2s; }
+    .expand-item[open] { border-color: var(--accent); }
+    .expand-item summary { padding: 14px 20px; cursor: pointer; display: flex; align-items: center; gap: 10px; list-style: none; user-select: none; font-size: 14px; font-weight: 600; color: var(--text); }
+    .expand-item summary::-webkit-details-marker { display: none; }
+    .expand-item summary::before { content: ''; width: 18px; height: 18px; flex-shrink: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='none' viewBox='0 0 24 24'%3E%3Cpath stroke='%238b8fa3' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' d='M9 18l6-6-6-6'/%3E%3C/svg%3E"); background-size: contain; transition: transform 0.2s; }
+    .expand-item[open] summary::before { transform: rotate(90deg); }
+    .expand-item .expand-body { padding: 0 20px 16px 48px; font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+    .expand-item .expand-body ul { margin-top: 8px; padding-left: 18px; }
+    .expand-item .expand-body li { margin-bottom: 4px; }
+    .expand-item .expand-body strong { color: var(--text); font-weight: 600; }
+    .expand-cmd { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 12px; color: var(--accent); }
+    .expand-tag { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 5px; letter-spacing: 0.3px; text-transform: uppercase; margin-left: auto; }
+    .expand-tag-core { background: var(--accent-soft); color: var(--accent); }
+    .expand-tag-seo { background: var(--green-soft); color: var(--green); }
+    .expand-tag-strategic { background: var(--amber-soft); color: var(--amber); }
+    .expand-tag-data { background: var(--blue-soft); color: var(--blue); }
+    .expand-tag-cro { background: var(--pink-soft); color: var(--pink); }
+    .expand-tag-content { background: rgba(99, 102, 241, 0.1); color: #6366f1; }
+    .expand-tag-growth { background: rgba(14, 165, 233, 0.1); color: #0ea5e9; }
+    .expand-tag-voice { background: rgba(139, 92, 246, 0.1); color: #8b5cf6; }
+    .expand-tag-product { background: rgba(249, 115, 22, 0.1); color: #f97316; }
+    .expand-tag-util { background: var(--surface-2); color: var(--text-muted); }
+
+    .group-heading { font-size: 14px; font-weight: 700; color: var(--text); margin: 24px 0 10px; display: flex; align-items: center; gap: 8px; }
+    .group-heading:first-child { margin-top: 0; }
+    .group-icon { width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
+
+    /* Misc */
+    code { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 12px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 4px; padding: 2px 6px; color: var(--accent); }
+    kbd { background: var(--surface-2); border: 1px solid var(--border); border-radius: 4px; padding: 2px 7px; font-family: 'SF Mono', monospace; font-size: 11px; color: var(--text-muted); }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .divider { height: 1px; background: var(--border); margin: 0 0 56px; }
+    .key-concept { background: linear-gradient(135deg, rgba(91, 82, 224, 0.06) 0%, rgba(194, 24, 91, 0.06) 100%); border: 1px solid rgba(91, 82, 224, 0.2); border-radius: var(--radius); padding: 24px; margin: 16px 0; }
+    .key-concept h3 { font-size: 15px; color: var(--accent); margin-bottom: 6px; }
+    .key-concept p { font-size: 14px; color: var(--text-muted); }
+    footer { padding: 32px 0; color: var(--text-muted); font-size: 13px; }
+    footer a { color: var(--accent); }
+
+    /* Mobile */
+    .mobile-nav-toggle { display: none; position: fixed; top: 16px; left: 16px; z-index: 200; width: 40px; height: 40px; border-radius: 10px; background: var(--surface); border: 1px solid var(--border); color: var(--text); font-size: 18px; cursor: pointer; align-items: center; justify-content: center; }
+    .sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 90; }
+
+    @media (max-width: 860px) {
+      .mobile-nav-toggle { display: flex; }
+      .sidebar { transform: translateX(-100%); transition: transform 0.25s ease; }
+      .sidebar.open { transform: translateX(0); }
+      .sidebar-overlay.open { display: block; }
+      .main { margin-left: 0; padding: 64px 24px 80px; }
+      .skill-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<button class="mobile-nav-toggle" onclick="toggleSidebar()" aria-label="Toggle navigation">&#9776;</button>
+<div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <h2>Marketing Toolkit</h2>
+      <p>Your getting started guide</p>
+    </div>
+    <nav>
+      <a href="#welcome" class="active"><span class="nav-icon">&#128075;</span> Welcome</a>
+      <a href="#big-idea"><span class="nav-icon">&#128161;</span> The Big Idea</a>
+      <a href="#setup"><span class="nav-icon">&#9881;&#65039;</span> Setup</a>
+      <a href="#first-run"><span class="nav-icon">&#9654;&#65039;</span> First Run</a>
+      <div class="nav-divider"></div>
+      <a href="#skills"><span class="nav-icon">&#128736;&#65039;</span> Core Skills</a>
+      <a href="#client-briefs"><span class="nav-icon">&#128203;</span> Client Briefs</a>
+      <a href="#in-practice"><span class="nav-icon">&#128172;</span> In Practice</a>
+      <div class="nav-divider"></div>
+      <a href="#power-moves"><span class="nav-icon">&#9889;</span> Power Moves</a>
+      <a href="#workflow"><span class="nav-icon">&#128640;</span> Workflow</a>
+      <a href="#tips"><span class="nav-icon">&#127919;</span> Pro Tips</a>
+      <div class="nav-divider"></div>
+      <a href="#commands"><span class="nav-icon">&#128421;&#65039;</span> Commands</a>
+      <a href="#full-reference"><span class="nav-icon">&#128218;</span> Full Reference</a>
+      <a href="#files"><span class="nav-icon">&#128193;</span> File Structure</a>
+    </nav>
+  </aside>
+
+  <main class="main">
+
+    <section id="welcome" class="hero">
+      <h1>Welcome &mdash; let's get you set up.</h1>
+      <p>This is your marketing toolkit &mdash; it turns Claude into a <strong>seriously good SEO expert, marketer and brand guardian</strong> with 42 skills covering copywriting, SEO, CRO, strategy, analytics, and more. Plus live data from Google Search Console and GA4. You just talk to it &mdash; right inside VS Code.</p>
+    </section>
+
+    <section id="big-idea">
+      <h2><span class="section-icon">&#128161;</span> The Big Idea</h2>
+      <p class="lead">Before we do anything, here's the one concept that makes everything click.</p>
+
+      <div class="key-concept">
+        <h3>You describe each client once. Every skill remembers.</h3>
+        <p>Inside this project is a hidden folder called <code>.claude/</code>. It's like Claude's brain for this project. When you tell Claude about a client &mdash; their audience, voice, goals &mdash; it saves that info. Then every time you ask it to write copy, audit SEO, or plan content, it already knows who it's working for. No repeating yourself.</p>
+      </div>
+
+      <div class="tip tip-amber">
+        <div class="tip-icon">&#128172;</div>
+        <div class="tip-content">
+          <strong>Quick heads-up:</strong> This uses Claude Code inside VS Code (not the Claude chat app). Same Claude brain, but this version can read files, remember context between tasks, and work directly in your editor. That's what makes the magic work.
+        </div>
+      </div>
+    </section>
+
+    <section id="setup">
+      <h2><span class="section-icon">&#9881;&#65039;</span> Setup</h2>
+      <p class="lead">Five quick steps and you're good to go. Takes about 10 minutes.</p>
+
+      <div class="setup-steps">
+        <div class="setup-step">
+          <div class="step-badge">1</div>
+          <div>
+            <h3>Install VS Code</h3>
+            <p>VS Code is a free code editor from Microsoft &mdash; it's where everything runs. Go to <a href="https://code.visualstudio.com">code.visualstudio.com</a> and click the big blue <strong>"Download"</strong> button. It'll detect whether you're on Mac or Windows automatically.</p>
+            <ul style="margin-top: 8px; padding-left: 20px; font-size: 14px; color: var(--text-muted);">
+              <li><strong>Mac:</strong> Open the downloaded <code>.zip</code> file. Drag the "Visual Studio Code" app into your <strong>Applications</strong> folder. Then open it from Applications (or search "Visual Studio Code" in Spotlight).</li>
+              <li><strong>Windows:</strong> Run the downloaded <code>.exe</code> installer. Click "Next" through each step, tick "Add to PATH" if it asks, then click "Install". Open it from the Start menu when it's done.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="setup-step">
+          <div class="step-badge">2</div>
+          <div>
+            <h3>Grab Node.js</h3>
+            <p>Claude Code needs this to run behind the scenes. Head to <a href="https://nodejs.org">nodejs.org</a>, click the big green "LTS" download button, open the downloaded file and click through the installer (just keep hitting "Continue" / "Next"). You won't need to think about it again.</p>
+          </div>
+        </div>
+        <div class="setup-step">
+          <div class="step-badge">3</div>
+          <div>
+            <h3>Install the Claude Code extension</h3>
+            <p>Open VS Code. On the left sidebar, click the <strong>Extensions icon</strong> (it looks like four small squares). In the search box at the top, type <strong>"Claude Code"</strong>. Find the one published by <strong>Anthropic</strong> (it'll have a blue tick and 2M+ installs) and click <strong>Install</strong>. Double-check the publisher says "Anthropic" &mdash; there are copycats.</p>
+          </div>
+        </div>
+        <div class="setup-step">
+          <div class="step-badge">4</div>
+          <div>
+            <h3>Sign in</h3>
+            <p>You need a Claude <strong>Pro, Max, Team, or Enterprise</strong> subscription. After installing the extension, it'll prompt you to sign in with your Anthropic account. Follow the login flow and you're done.</p>
+            <div class="tip tip-amber" style="margin-top: 10px;">
+              <div class="tip-icon">&#128176;</div>
+              <div class="tip-content">
+                <strong>Pay-as-you-go option:</strong> Instead of a subscription, you can use API credits. Sign up at <a href="https://console.anthropic.com">console.anthropic.com</a>, click "API Keys" in the sidebar, create a key, and add credits. Claude Code will ask for the key on first launch.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tip tip-green">
+        <div class="tip-icon">&#127916;</div>
+        <div class="tip-content">
+          <strong>Prefer watching a video?</strong> <a href="https://www.youtube.com/watch?v=ph5DRCX_g6s" target="_blank">This walkthrough on YouTube</a> covers the full setup and core features. Worth watching before you dive in.
+        </div>
+      </div>
+    </section>
+
+    <section id="first-run">
+      <h2><span class="section-icon">&#9654;&#65039;</span> Your First Run</h2>
+      <p class="lead">Open this project folder in VS Code and start chatting. That's literally it.</p>
+
+      <div class="setup-steps">
+        <div class="setup-step">
+          <div class="step-badge">1</div>
+          <div>
+            <h3>Open this folder in VS Code</h3>
+            <p>Go to <em>File &rarr; Open Folder</em> and select this project folder. Claude Code needs to be in the right folder to find the skills and client briefs.</p>
+          </div>
+        </div>
+        <div class="setup-step">
+          <div class="step-badge">2</div>
+          <div>
+            <h3>Open Claude Code</h3>
+            <p>Click the <strong>sparkle icon</strong> in the top-right corner of your editor (it appears when you have a file open). You can also press <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> (Mac) or <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> (Windows), type "Claude Code", and select "Open in New Tab". Or just click <strong>&#10033; Claude Code</strong> in the bottom-right status bar.</p>
+          </div>
+        </div>
+        <div class="setup-step">
+          <div class="step-badge">3</div>
+          <div>
+            <h3>Start talking</h3>
+            <p>Type what you need and hit Enter. That's it. Try any of these:</p>
+            <div class="convo" style="margin-top: 8px;">
+              <div class="convo-msg">
+                <div class="convo-avatar you">Y</div>
+                <div class="convo-bubble">Set up a client brief for Sunrise Bakery</div>
+              </div>
+              <div class="convo-msg">
+                <div class="convo-avatar you">Y</div>
+                <div class="convo-bubble">Run an SEO audit on sunrisebakery.com</div>
+              </div>
+              <div class="convo-msg">
+                <div class="convo-avatar you">Y</div>
+                <div class="convo-bubble">Write a LinkedIn post about why artisan sourdough is worth the wait</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tip tip-green">
+        <div class="tip-icon">&#127881;</div>
+        <div class="tip-content">
+          <strong>That's all there is to it.</strong> You just type in plain English. The Claude Code panel is basically a chat window with superpowers &mdash; it can read files, browse websites, and use all the marketing skills automatically. No coding, no weird syntax.
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section id="skills">
+      <h2><span class="section-icon">&#128736;&#65039;</span> Core Skills</h2>
+      <p class="lead">These are the 7 foundational skills you'll use most. For the full 50+ skill toolkit, see the <a href="#full-reference">Full Reference</a> below.</p>
+
+      <div class="skill-grid">
+        <div class="skill-card">
+          <div class="skill-name">/client-brief</div>
+          <div class="skill-desc">Document a client's brand, audience, and goals. <span class="skill-highlight">Start here for each new client.</span></div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-name">/content-strategy</div>
+          <div class="skill-desc">Plan what to write, find topic clusters, and prioritise by impact.</div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-name">/copywriting</div>
+          <div class="skill-desc">Write blog posts, landing pages, emails, ads, social posts, case studies.</div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-name">/page-cro</div>
+          <div class="skill-desc">Analyse any page and get recommendations to boost conversions.</div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-name">/seo-audit</div>
+          <div class="skill-desc">Full technical + on-page SEO audit with a prioritised fix list.</div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-name">/schema-markup</div>
+          <div class="skill-desc">Add structured data so your pages stand out in Google results.</div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-name">/competitor-analysis</div>
+          <div class="skill-desc">Research competitors and find positioning opportunities.</div>
+        </div>
+      </div>
+
+      <div class="tip tip-blue" style="margin-top: 16px;">
+        <div class="tip-icon">&#128173;</div>
+        <div class="tip-content">
+          <strong>Don't memorise these.</strong> Just ask what you need &mdash; "Write a blog post for Sunrise Bakery" or "Audit our SEO" &mdash; and Claude picks the right skill automatically.
+        </div>
+      </div>
+    </section>
+
+    <section id="client-briefs">
+      <h2><span class="section-icon">&#128203;</span> Client Briefs</h2>
+      <p class="lead">This is the secret sauce. Set up a brief once, and every skill becomes client-aware.</p>
+
+      <div class="key-concept">
+        <h3>How it works</h3>
+        <p>Run <code>/client-brief</code> and Claude walks you through a friendly interview &mdash; who's the client, what do they do, who's their audience, what's their voice like? It saves everything to a context file. After that, whenever you ask for copy, strategy, or an audit, Claude already knows the client. No repeating yourself.</p>
+      </div>
+
+      <div class="card">
+        <h3>What Claude knows after a brief</h3>
+        <ul>
+          <li>Target audience and their pain points</li>
+          <li>Brand voice (e.g. "confident but not arrogant")</li>
+          <li>SEO keywords and content priorities</li>
+          <li>Competitors and market positioning</li>
+          <li>Products, services, and differentiators</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Multiple clients? No problem.</h3>
+        <p>Each client gets their own brief file in <code>.claude/clients/</code>. Switch clients by saying "I'm working on Sunrise Bakery" and Claude loads the right context.</p>
+      </div>
+
+      <div class="flow">
+        <div class="flow-step">
+          <div class="flow-icon" style="background: var(--amber-soft);">&#128221;</div>
+          <div class="flow-label">Brief</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-icon" style="background: var(--accent-soft);">&#128270;</div>
+          <div class="flow-label">Research</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-icon" style="background: var(--green-soft);">&#128200;</div>
+          <div class="flow-label">Audit</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-icon" style="background: var(--pink-soft);">&#128203;</div>
+          <div class="flow-label">Plan</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-icon" style="background: var(--blue-soft);">&#9997;&#65039;</div>
+          <div class="flow-label">Write</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-icon" style="background: var(--green-soft);">&#128640;</div>
+          <div class="flow-label">Optimise</div>
+        </div>
+      </div>
+      <p style="text-align: center; color: var(--text-muted); font-size: 13px;">All steps share the same client context automatically.</p>
+    </section>
+
+    <section id="in-practice">
+      <h2><span class="section-icon">&#128172;</span> What It Looks Like</h2>
+      <p class="lead">Here's a quick peek at what a real conversation feels like.</p>
+
+      <div class="convo">
+        <div class="convo-msg">
+          <div class="convo-avatar you">Y</div>
+          <div class="convo-bubble">Set up a client brief for Sunrise Bakery</div>
+        </div>
+        <div class="convo-msg">
+          <div class="convo-avatar ai">C</div>
+          <div class="convo-bubble ai-bubble">
+            Let's do it! I'll ask a few questions at a time. Skip anything you don't know yet.<br><br>
+            <strong>Company Overview</strong><br>
+            What does Sunrise Bakery do? Give me the elevator pitch.
+          </div>
+        </div>
+        <div class="convo-msg">
+          <div class="convo-avatar you">Y</div>
+          <div class="convo-bubble">They're an artisan bakery in Melbourne. Sourdough, pastries, coffee. Three locations, plus wholesale to cafes. About 20 staff.</div>
+        </div>
+        <div class="convo-msg">
+          <div class="convo-avatar ai">C</div>
+          <div class="convo-bubble ai-bubble">
+            Got it &mdash; artisan bakery, Melbourne, 3 locations, sourdough and pastries, plus wholesale.<br><br>
+            <strong>Services &amp; Products</strong><br>
+            What are their signature products? Any seasonal specials? Which product line are we marketing right now?
+          </div>
+        </div>
+      </div>
+
+      <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 20px;">It walks through all the sections, then saves everything. Now the fun part &mdash; watch what happens when you ask for content:</p>
+
+      <div class="convo">
+        <div class="convo-msg">
+          <div class="convo-avatar you">Y</div>
+          <div class="convo-bubble">Write a LinkedIn post about why artisan sourdough is worth the wait</div>
+        </div>
+        <div class="convo-msg">
+          <div class="convo-avatar ai">C</div>
+          <div class="convo-bubble ai-bubble">
+            I can see this is for Sunrise Bakery. I'll use their voice (warm, down-to-earth) and target their audience (local foodies and cafe owners looking for quality suppliers).<br><br>
+            What angle do you want &mdash; the craft and patience behind a 48-hour ferment, or the health benefits of real sourdough vs supermarket bread?
+          </div>
+        </div>
+      </div>
+
+      <p style="color: var(--text-muted); font-size: 13px;">It already knows the client, their voice, and their audience &mdash; because you set up the brief earlier. Pretty handy.</p>
+    </section>
+
+    <div class="divider"></div>
+
+    <section id="power-moves">
+      <h2><span class="section-icon">&#9889;</span> Power Moves</h2>
+      <p class="lead">Three ways to get even more out of the toolkit.</p>
+
+      <div class="card">
+        <h3>Content Audits</h3>
+        <p>Give Claude a URL and ask it to review. Some good ones to try:</p>
+        <ul>
+          <li>"Audit the SEO on sunrisebakery.com/blog and tell me what's missing"</li>
+          <li>"Read this landing page and tell me if the copy matches our brand voice"</li>
+          <li>"Check this post's keyword usage &mdash; primary keyword is 'artisan sourdough Melbourne'"</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>SEO Optimisation</h3>
+        <p>Get Claude to optimise anything for search:</p>
+        <ul>
+          <li>"Write a meta description under 160 characters for this page"</li>
+          <li>"Make sure the keyword is in the first heading and intro"</li>
+          <li>"Add schema markup to this blog post for rich results"</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Live Research</h3>
+        <p>Claude can search the web in real time:</p>
+        <ul>
+          <li>"Search for [competitor] and analyse their positioning"</li>
+          <li>"What are people on Reddit saying about Lake Kariba holidays?"</li>
+          <li>"Compare our messaging against the top 3 competitors"</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="workflow">
+      <h2><span class="section-icon">&#128640;</span> New Client Workflow</h2>
+      <p class="lead">When you're onboarding someone new, this order works best. But no pressure &mdash; you can jump to any skill anytime.</p>
+
+      <ul class="checklist">
+        <li><strong style="color: var(--text);">/client-brief</strong> &mdash; Document who they are, what they do, and how they should sound</li>
+        <li><strong style="color: var(--text);">/competitor-analysis</strong> &mdash; Map the competitive landscape and spot opportunities</li>
+        <li><strong style="color: var(--text);">/seo-audit</strong> &mdash; Find SEO issues and quick wins on their current site</li>
+        <li><strong style="color: var(--text);">/content-strategy</strong> &mdash; Plan what content to create and why</li>
+        <li><strong style="color: var(--text);">/copywriting</strong> &mdash; Write the blog posts, emails, landing pages</li>
+        <li><strong style="color: var(--text);">/page-cro</strong> &mdash; Optimise key pages for conversions</li>
+        <li><strong style="color: var(--text);">/schema-markup</strong> &mdash; Add structured data for rich search results</li>
+      </ul>
+
+      <div class="tip tip-blue">
+        <div class="tip-icon">&#128260;</div>
+        <div class="tip-content">
+          <strong>This is a suggestion, not a rulebook.</strong> Need a quick LinkedIn post? Just use <code>/copywriting</code>. Want to check a page? Jump to <code>/seo-audit</code>. The full workflow is for thorough onboardings.
+        </div>
+      </div>
+    </section>
+
+    <section id="tips">
+      <h2><span class="section-icon">&#127919;</span> Pro Tips</h2>
+      <p class="lead">A few things that make a real difference in quality.</p>
+
+      <div class="card">
+        <h3>Be specific, not vague</h3>
+        <p><span style="color: var(--red);">Meh:</span> "Write a blog post about marketing"<br>
+        <span style="color: var(--green);">Great:</span> "Write a 1,200-word blog post for CFOs about why fractional CMOs outperform agencies, confident tone, include data"</p>
+      </div>
+
+      <div class="card">
+        <h3>Share URLs</h3>
+        <p>Claude can read live web pages. Paste a competitor's site, a client landing page, or an article you like &mdash; it'll use it as context.</p>
+      </div>
+
+      <div class="card">
+        <h3>Iterate, don't settle</h3>
+        <p>First drafts are starting points. Say things like: "Make the headline punchier", "Too formal &mdash; make it conversational", "Add more examples", "Cut this by 30%".</p>
+      </div>
+
+      <div class="card">
+        <h3>Feed it reference material</h3>
+        <p>Got keyword research, analytics screenshots, brand guidelines, or competitor copy? Share them. More context = better output.</p>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section id="commands">
+      <h2><span class="section-icon">&#128421;&#65039;</span> Handy Commands</h2>
+      <p class="lead">Quick reference for things you'll type in the Claude Code panel.</p>
+
+      <div class="terminal">
+        <div class="terminal-header">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <div class="terminal-title">Claude Code panel in VS Code</div>
+        </div>
+        <div class="terminal-body">
+          <span class="comment"># Use skills by typing a slash command...</span><br>
+          <span class="prompt">&gt;</span> /client-brief<br>
+          <span class="prompt">&gt;</span> /copywriting<br>
+          <span class="prompt">&gt;</span> /seo-audit<br><br>
+          <span class="comment"># ...or just type what you need</span><br>
+          <span class="prompt">&gt;</span> Write a case study for Sunrise Bakery<br>
+          <span class="prompt">&gt;</span> What should we blog about next?<br><br>
+          <span class="comment"># Handy built-in commands</span><br>
+          <span class="prompt">&gt;</span> /clear &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># Fresh start, clears the conversation</span><br>
+          <span class="prompt">&gt;</span> /compact &nbsp;&nbsp;&nbsp;<span class="comment"># Free up memory if Claude gets slow</span><br>
+          <span class="prompt">&gt;</span> /help &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># Get help</span><br>
+        </div>
+      </div>
+
+      <div class="tip tip-amber">
+        <div class="tip-icon">&#128260;</div>
+        <div class="tip-content">
+          <strong>Use <kbd>/clear</kbd> between clients.</strong> When switching from one client to another, clear the chat so context doesn't bleed across.
+        </div>
+      </div>
+    </section>
+
+    <section id="full-reference">
+      <h2><span class="section-icon">&#128218;</span> Full Reference</h2>
+      <p class="lead">Everything in the toolkit, all in one place. Click to expand any item.</p>
+
+      <div class="group-heading">
+        <div class="group-icon" style="background: var(--accent-soft);">&#9997;&#65039;</div>
+        Core Marketing Skills
+      </div>
+
+      <div class="expand-list">
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/client-brief</span>
+            <span>Client Brief</span>
+            <span class="expand-tag expand-tag-strategic">Strategic</span>
+          </summary>
+          <div class="expand-body">
+            Document a client's brand, audience, voice, competitors, and goals through a guided interview. Creates a context file that <strong>every other skill reads automatically</strong>.
+            <ul>
+              <li>Walks you through 8 sections step by step</li>
+              <li>Covers company overview, products, audience, competitors, brand voice, keywords, and goals</li>
+              <li>Supports multiple clients &mdash; each gets their own file</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/content-strategy</span>
+            <span>Content Strategy</span>
+            <span class="expand-tag expand-tag-core">Core</span>
+          </summary>
+          <div class="expand-body">
+            Plan what content to create, find topic clusters, and prioritise by impact.
+            <ul>
+              <li>Builds topic clusters around core themes</li>
+              <li>Prioritises by search volume, competition, and business value</li>
+              <li>Creates an editorial calendar with keywords</li>
+              <li>Spots content gaps vs competitors</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/copywriting</span>
+            <span>Copywriting</span>
+            <span class="expand-tag expand-tag-core">Core</span>
+          </summary>
+          <div class="expand-body">
+            Write clear, persuasive copy for any marketing asset. Uses your client's voice and audience automatically.
+            <ul>
+              <li>Blog posts, landing pages, emails, ads, social posts, case studies</li>
+              <li>Clarifies audience, goal, tone, and format before writing</li>
+              <li>Human-sounding copy that drives action, not generic AI fluff</li>
+              <li>SEO-aware without writing <em>for</em> search engines</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/page-cro</span>
+            <span>Page CRO</span>
+            <span class="expand-tag expand-tag-core">Core</span>
+          </summary>
+          <div class="expand-body">
+            Analyse any page and get recommendations to improve conversions.
+            <ul>
+              <li>Reviews headlines, value props, and CTA placement</li>
+              <li>Finds friction points, trust gaps, and missing social proof</li>
+              <li>Prioritised recs ranked by expected impact</li>
+              <li>Can read a live URL and analyse it</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/competitor-analysis</span>
+            <span>Competitor Analysis</span>
+            <span class="expand-tag expand-tag-strategic">Strategic</span>
+          </summary>
+          <div class="expand-body">
+            Research competitors, map positioning, and find ways to stand out.
+            <ul>
+              <li>Analyses competitor websites and messaging live</li>
+              <li>Maps the landscape and identifies gaps</li>
+              <li>Compares pricing, features, and audiences</li>
+              <li>Surfaces differentiation opportunities</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/seo-audit</span>
+            <span>SEO Audit</span>
+            <span class="expand-tag expand-tag-seo">SEO</span>
+          </summary>
+          <div class="expand-body">
+            Full technical and on-page SEO audit with a prioritised action plan.
+            <ul>
+              <li>Technical: crawlability, indexing, speed, mobile</li>
+              <li>On-page: titles, meta descriptions, headings, keywords</li>
+              <li>Content quality: thin content, duplicates, missing topics</li>
+              <li>Prioritised fixes ranked by effort vs impact</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/schema-markup</span>
+            <span>Schema Markup</span>
+            <span class="expand-tag expand-tag-seo">SEO</span>
+          </summary>
+          <div class="expand-body">
+            Add JSON-LD structured data for rich Google search results.
+            <ul>
+              <li>Generates ready-to-paste JSON-LD code</li>
+              <li>FAQ, HowTo, Product, LocalBusiness, Article, Breadcrumb, and more</li>
+              <li>Checks existing schema for errors</li>
+              <li>Explains which types trigger rich snippets</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+
+      <div class="group-heading">
+        <div class="group-icon" style="background: var(--green-soft);">&#128200;</div>
+        Google Search Console
+      </div>
+
+      <div class="expand-list">
+        <details class="expand-item">
+          <summary>
+            <span>Performance Overview</span>
+            <span class="expand-tag expand-tag-data">Data</span>
+          </summary>
+          <div class="expand-body">
+            High-level snapshot &mdash; total clicks, impressions, CTR, and position over any time period. A quick organic search health check.
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span>Search Analytics</span>
+            <span class="expand-tag expand-tag-data">Data</span>
+          </summary>
+          <div class="expand-body">
+            Detailed data by query, page, device, country, or date. See which keywords drive traffic, which pages rank, and how things change over time. Filtering, sorting, and period comparison included.
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span>URL Inspection</span>
+            <span class="expand-tag expand-tag-data">Data</span>
+          </summary>
+          <div class="expand-body">
+            Check if Google has indexed a page and if not, why not. Shows crawl status, indexing status, and issues. Single or batch inspection.
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span>Indexing Issues</span>
+            <span class="expand-tag expand-tag-data">Data</span>
+          </summary>
+          <div class="expand-body">
+            Diagnose why pages aren't in Google. Checks noindex tags, crawl blocks, redirects, canonicals, and more across multiple URLs.
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span>Sitemap Management</span>
+            <span class="expand-tag expand-tag-data">Data</span>
+          </summary>
+          <div class="expand-body">
+            List, inspect, and submit XML sitemaps. See URL discovery counts, check for errors, and submit updated sitemaps.
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span>Period Comparison</span>
+            <span class="expand-tag expand-tag-data">Data</span>
+          </summary>
+          <div class="expand-body">
+            Compare performance across two time periods. Spot which queries gained or lost clicks, which pages improved or declined.
+          </div>
+        </details>
+      </div>
+
+      <div class="group-heading">
+        <div class="group-icon" style="background: var(--blue-soft);">&#128202;</div>
+        Google Analytics 4
+      </div>
+
+      <div class="expand-list">
+        <details class="expand-item">
+          <summary>
+            <span>Traffic &amp; Engagement Reports</span>
+            <span class="expand-tag expand-tag-data">Data</span>
+          </summary>
+          <div class="expand-body">
+            Custom GA4 reports &mdash; sessions, users, page views, events, conversions. Filter by source, medium, campaign, page, country, device, and any date range.
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span>Realtime Reports</span>
+            <span class="expand-tag expand-tag-data">Data</span>
+          </summary>
+          <div class="expand-body">
+            What's happening right now &mdash; active users, live page views, event streams, traffic sources. Great for monitoring launches.
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span>Property Details</span>
+            <span class="expand-tag expand-tag-data">Data</span>
+          </summary>
+          <div class="expand-body">
+            GA4 property config &mdash; custom dimensions, metrics, Ads links, and settings. Useful for understanding what data is available.
+          </div>
+        </details>
+      </div>
+
+      <div class="group-heading">
+        <div class="group-icon" style="background: var(--green-soft);">&#128269;</div>
+        Extended SEO Skills
+      </div>
+
+      <div class="expand-list">
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/seo</span>
+            <span>Comprehensive SEO</span>
+            <span class="expand-tag expand-tag-seo">SEO</span>
+          </summary>
+          <div class="expand-body">
+            Full-site SEO analysis for any website or business type. Performs site audits, single-page analysis, technical SEO checks, and content gap detection.
+            <ul>
+              <li>Auto-detects business type (local, ecommerce, SaaS, publisher) and adapts</li>
+              <li>Crawls up to 500 pages for site-wide insights</li>
+              <li>Combines technical, on-page, and content analysis in one report</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/seo-plan</span>
+            <span>SEO Strategy Plan</span>
+            <span class="expand-tag expand-tag-seo">SEO</span>
+          </summary>
+          <div class="expand-body">
+            Strategic SEO planning with industry-specific templates. Creates a prioritised roadmap based on competitive analysis and content strategy.
+            <ul>
+              <li>Industry templates for SaaS, ecommerce, local business, and more</li>
+              <li>Competitive gap analysis and keyword opportunity mapping</li>
+              <li>Phased implementation roadmap with estimated timelines</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/seo-page</span>
+            <span>Single Page SEO</span>
+            <span class="expand-tag expand-tag-seo">SEO</span>
+          </summary>
+          <div class="expand-body">
+            Deep analysis of a single page covering on-page elements, content quality, technical meta tags, schema, images, and performance.
+            <ul>
+              <li>Title, meta, headings, keyword placement, internal linking</li>
+              <li>Content depth, readability, and topical coverage</li>
+              <li>Image optimisation, Core Web Vitals, and structured data</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/seo-geo</span>
+            <span>AI Search / GEO</span>
+            <span class="expand-tag expand-tag-seo">SEO</span>
+          </summary>
+          <div class="expand-body">
+            Optimise content for AI Overviews, ChatGPT web search, Perplexity, and other AI-powered search experiences.
+            <ul>
+              <li>Structure content so AI models can cite and quote it</li>
+              <li>Optimise for featured snippets and AI answer boxes</li>
+              <li>Generative Engine Optimisation (GEO) best practices</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/seo-hreflang</span>
+            <span>International SEO</span>
+            <span class="expand-tag expand-tag-seo">SEO</span>
+          </summary>
+          <div class="expand-body">
+            Hreflang audit, validation, and generation. Catches common mistakes in multi-language and multi-region setups.
+            <ul>
+              <li>Validates language/region codes and return links</li>
+              <li>Detects missing or conflicting hreflang tags</li>
+              <li>Generates correct hreflang markup for your site</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/seo-sitemap</span>
+            <span>Sitemap Analysis</span>
+            <span class="expand-tag expand-tag-seo">SEO</span>
+          </summary>
+          <div class="expand-body">
+            Analyse existing XML sitemaps or generate new ones with industry templates. Validates format, URLs, and structure.
+            <ul>
+              <li>Checks for errors, missing URLs, and incorrect priorities</li>
+              <li>Generates sitemaps for different site types</li>
+              <li>Quality gates for location pages and large sites</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/seo-competitor-pages</span>
+            <span>Competitor Pages</span>
+            <span class="expand-tag expand-tag-seo">SEO</span>
+          </summary>
+          <div class="expand-body">
+            Generate SEO-optimised competitor comparison and alternatives pages. Great for capturing high-intent search traffic.
+            <ul>
+              <li>"X vs Y" comparison page layouts</li>
+              <li>"Alternatives to X" pages with feature matrices</li>
+              <li>Optimised for comparison keywords that signal buying intent</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/programmatic-seo</span>
+            <span>Programmatic SEO</span>
+            <span class="expand-tag expand-tag-seo">SEO</span>
+          </summary>
+          <div class="expand-body">
+            Create SEO-driven pages at scale using templates and data. Build hundreds of targeted landing pages from a single template.
+            <ul>
+              <li>Template design for location, category, or use-case pages</li>
+              <li>Data-driven content generation at scale</li>
+              <li>Internal linking strategy for programmatic page sets</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+
+      <div class="group-heading">
+        <div class="group-icon" style="background: var(--pink-soft);">&#128200;</div>
+        CRO Skills
+      </div>
+
+      <div class="expand-list">
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/form-cro</span>
+            <span>Form Optimisation</span>
+            <span class="expand-tag expand-tag-cro">CRO</span>
+          </summary>
+          <div class="expand-body">
+            Optimise lead capture forms, contact forms, demo request forms, and any non-signup form for better completion rates.
+            <ul>
+              <li>Field reduction and progressive disclosure strategies</li>
+              <li>Error handling, validation, and micro-copy improvements</li>
+              <li>Trust signals, privacy messaging, and social proof placement</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/signup-flow-cro</span>
+            <span>Signup Flow</span>
+            <span class="expand-tag expand-tag-cro">CRO</span>
+          </summary>
+          <div class="expand-body">
+            Optimise signup, registration, account creation, and trial activation flows for higher completion rates.
+            <ul>
+              <li>Step-by-step flow analysis and friction reduction</li>
+              <li>Social login, email verification, and onboarding handoff</li>
+              <li>Trial activation and first-value optimisation</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/onboarding-cro</span>
+            <span>Onboarding</span>
+            <span class="expand-tag expand-tag-cro">CRO</span>
+          </summary>
+          <div class="expand-body">
+            Optimise post-signup onboarding, user activation, and time-to-value. Reduce churn in the critical first session.
+            <ul>
+              <li>First-run experience design and checklist flows</li>
+              <li>Activation milestones and progress indicators</li>
+              <li>Email and in-app nudge sequences</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/paywall-upgrade-cro</span>
+            <span>Paywall &amp; Upgrade</span>
+            <span class="expand-tag expand-tag-cro">CRO</span>
+          </summary>
+          <div class="expand-body">
+            Create or optimise in-app paywalls, upgrade screens, upsell modals, and feature gates.
+            <ul>
+              <li>Plan comparison layouts and pricing psychology</li>
+              <li>Feature gating strategy and upgrade trigger points</li>
+              <li>Copy for upsell modals and limit-reached screens</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/popup-cro</span>
+            <span>Popup Optimisation</span>
+            <span class="expand-tag expand-tag-cro">CRO</span>
+          </summary>
+          <div class="expand-body">
+            Create or optimise popups, modals, overlays, slide-ins, and banners for conversions without ruining the user experience.
+            <ul>
+              <li>Trigger timing, targeting rules, and exit intent</li>
+              <li>Copy, layout, and CTA optimisation</li>
+              <li>A/B testing recommendations and frequency capping</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/ab-test-setup</span>
+            <span>A/B Test Setup</span>
+            <span class="expand-tag expand-tag-cro">CRO</span>
+          </summary>
+          <div class="expand-body">
+            Plan, design, and implement A/B tests and experiments with statistical rigour.
+            <ul>
+              <li>Hypothesis formation and sample size calculation</li>
+              <li>Variant design and success metric definition</li>
+              <li>Test duration planning and result interpretation</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+
+      <div class="group-heading">
+        <div class="group-icon" style="background: rgba(99, 102, 241, 0.1);">&#9997;&#65039;</div>
+        Copy &amp; Content
+      </div>
+
+      <div class="expand-list">
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/copy-editing</span>
+            <span>Copy Editing</span>
+            <span class="expand-tag expand-tag-content">Content</span>
+          </summary>
+          <div class="expand-body">
+            Edit, review, and improve existing marketing copy. Tightens prose, fixes tone issues, and sharpens messaging.
+            <ul>
+              <li>Line-by-line editing with tracked suggestions</li>
+              <li>Tone and voice consistency checks</li>
+              <li>Readability improvements and jargon removal</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/social-content</span>
+            <span>Social Media Content</span>
+            <span class="expand-tag expand-tag-content">Content</span>
+          </summary>
+          <div class="expand-body">
+            Create and optimise social media content for LinkedIn, Twitter/X, Instagram, TikTok, Facebook, and more.
+            <ul>
+              <li>Platform-specific formatting and character limits</li>
+              <li>Hook writing, carousel scripts, and thread structures</li>
+              <li>Hashtag strategy and posting schedule recommendations</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/email-sequence</span>
+            <span>Email Sequences</span>
+            <span class="expand-tag expand-tag-content">Content</span>
+          </summary>
+          <div class="expand-body">
+            Create or optimise email sequences, drip campaigns, automated flows, and lifecycle emails.
+            <ul>
+              <li>Welcome, nurture, onboarding, and re-engagement sequences</li>
+              <li>Subject line and preview text optimisation</li>
+              <li>Timing, segmentation, and send cadence strategy</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/competitor-alternatives</span>
+            <span>Competitor Pages</span>
+            <span class="expand-tag expand-tag-content">Content</span>
+          </summary>
+          <div class="expand-body">
+            Create competitor comparison and alternatives pages for SEO and sales enablement.
+            <ul>
+              <li>"Us vs Them" comparison pages with feature matrices</li>
+              <li>"Best alternatives to X" roundup content</li>
+              <li>Sales battle cards and competitive positioning docs</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+
+      <div class="group-heading">
+        <div class="group-icon" style="background: rgba(14, 165, 233, 0.1);">&#127919;</div>
+        Strategy &amp; Growth
+      </div>
+
+      <div class="expand-list">
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/marketing-ideas</span>
+            <span>Marketing Ideas</span>
+            <span class="expand-tag expand-tag-growth">Growth</span>
+          </summary>
+          <div class="expand-body">
+            Generate marketing ideas, inspiration, and strategies for SaaS and software products.
+            <ul>
+              <li>Channel-specific campaign ideas</li>
+              <li>Growth experiments and quick wins</li>
+              <li>Seasonal and trend-based marketing hooks</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/marketing-psychology</span>
+            <span>Marketing Psychology</span>
+            <span class="expand-tag expand-tag-growth">Growth</span>
+          </summary>
+          <div class="expand-body">
+            Apply psychological principles, mental models, and behavioural science to marketing copy and strategy.
+            <ul>
+              <li>Cialdini's principles, loss aversion, anchoring, social proof</li>
+              <li>Cognitive biases applied to pricing, CTAs, and messaging</li>
+              <li>Ethical persuasion frameworks for landing pages and emails</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/pricing-strategy</span>
+            <span>Pricing Strategy</span>
+            <span class="expand-tag expand-tag-growth">Growth</span>
+          </summary>
+          <div class="expand-body">
+            Help with pricing decisions, packaging, and monetisation strategy.
+            <ul>
+              <li>Pricing model analysis (freemium, tiered, usage-based, per-seat)</li>
+              <li>Competitive pricing benchmarking</li>
+              <li>Plan packaging and feature allocation strategy</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/free-tool-strategy</span>
+            <span>Free Tool Strategy</span>
+            <span class="expand-tag expand-tag-growth">Growth</span>
+          </summary>
+          <div class="expand-body">
+            Plan, evaluate, or build a free tool for marketing purposes like lead generation, SEO value, or brand awareness.
+            <ul>
+              <li>Tool idea generation based on audience pain points</li>
+              <li>Build vs buy analysis and MVP scoping</li>
+              <li>Distribution and conversion strategy</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/launch-strategy</span>
+            <span>Launch Strategy</span>
+            <span class="expand-tag expand-tag-growth">Growth</span>
+          </summary>
+          <div class="expand-body">
+            Plan a product launch, feature announcement, or release strategy.
+            <ul>
+              <li>Pre-launch, launch day, and post-launch playbooks</li>
+              <li>Channel-by-channel launch plans</li>
+              <li>Announcement copy, press kit, and social assets</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/referral-program</span>
+            <span>Referral Programs</span>
+            <span class="expand-tag expand-tag-growth">Growth</span>
+          </summary>
+          <div class="expand-body">
+            Create, optimise, or analyse referral programs, affiliate programs, and word-of-mouth strategies.
+            <ul>
+              <li>Incentive structure design (one-sided vs two-sided)</li>
+              <li>Referral flow UX and sharing mechanics</li>
+              <li>Tracking, attribution, and reward fulfilment</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/paid-ads</span>
+            <span>Paid Advertising</span>
+            <span class="expand-tag expand-tag-growth">Growth</span>
+          </summary>
+          <div class="expand-body">
+            Help with paid campaigns on Google Ads, Meta, LinkedIn, Twitter/X, and other platforms.
+            <ul>
+              <li>Campaign structure, targeting, and bidding strategy</li>
+              <li>Ad copy, headlines, and creative recommendations</li>
+              <li>Budget allocation and performance forecasting</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/analytics-tracking</span>
+            <span>Analytics Tracking</span>
+            <span class="expand-tag expand-tag-growth">Growth</span>
+          </summary>
+          <div class="expand-body">
+            Set up, improve, or audit analytics tracking and measurement.
+            <ul>
+              <li>GA4 event setup, conversion tracking, and UTM strategy</li>
+              <li>Tracking plan documentation and tag management</li>
+              <li>Dashboard design and reporting frameworks</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/product-marketing-context</span>
+            <span>Product Marketing Context</span>
+            <span class="expand-tag expand-tag-growth">Growth</span>
+          </summary>
+          <div class="expand-body">
+            Create or update the product marketing context document that informs all other skills.
+            <ul>
+              <li>Positioning, messaging, and value proposition frameworks</li>
+              <li>ICP definition and buyer persona mapping</li>
+              <li>Competitive positioning and market category</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+
+      <div class="group-heading">
+        <div class="group-icon" style="background: rgba(139, 92, 246, 0.1);">&#127908;</div>
+        Voice &amp; Audio
+      </div>
+
+      <div class="expand-list">
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/voice-to-text</span>
+            <span>Voice to Text</span>
+            <span class="expand-tag expand-tag-voice">Voice</span>
+          </summary>
+          <div class="expand-body">
+            Transcribe audio and video files to text with speaker identification.
+            <ul>
+              <li>Supports common audio/video formats</li>
+              <li>Speaker diarisation (who said what)</li>
+              <li>Timestamped transcripts for easy reference</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/voice-briefing</span>
+            <span>Voice Briefing</span>
+            <span class="expand-tag expand-tag-voice">Voice</span>
+          </summary>
+          <div class="expand-body">
+            Analyse a meeting transcript or document and generate a TTS audio briefing you can listen to.
+            <ul>
+              <li>Summarises key points, decisions, and action items</li>
+              <li>Generates audio you can listen to on the go</li>
+              <li>Works with any transcript or long document</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+
+      <div class="group-heading">
+        <div class="group-icon" style="background: rgba(249, 115, 22, 0.1);">&#128736;&#65039;</div>
+        Product Development (BMAD)
+      </div>
+
+      <div class="expand-list">
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/bmad:prd</span>
+            <span>Product Requirements</span>
+            <span class="expand-tag expand-tag-product">Product</span>
+          </summary>
+          <div class="expand-body">
+            Create a Product Requirements Document (PRD) with a structured Product Manager workflow. Covers user stories, acceptance criteria, and feature specifications.
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/bmad:product-brief</span>
+            <span>Product Brief</span>
+            <span class="expand-tag expand-tag-product">Product</span>
+          </summary>
+          <div class="expand-body">
+            Business Analyst workflow for creating product briefs. Defines the problem, opportunity, target market, and success metrics.
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/bmad:architecture</span>
+            <span>System Architecture</span>
+            <span class="expand-tag expand-tag-product">Product</span>
+          </summary>
+          <div class="expand-body">
+            System Architect workflow for designing technical architecture. Covers system design, infrastructure, integrations, and scalability.
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/bmad:tech-spec</span>
+            <span>Technical Spec</span>
+            <span class="expand-tag expand-tag-product">Product</span>
+          </summary>
+          <div class="expand-body">
+            Write detailed technical specifications covering implementation approach, data models, API contracts, and testing strategy.
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/bmad:create-ux-design</span>
+            <span>UX Design</span>
+            <span class="expand-tag expand-tag-product">Product</span>
+          </summary>
+          <div class="expand-body">
+            UX Designer workflow for creating user experience designs. Covers wireframes, user flows, interaction patterns, and design specs.
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/bmad:create-story</span>
+            <span>Create User Stories</span>
+            <span class="expand-tag expand-tag-product">Product</span>
+          </summary>
+          <div class="expand-body">
+            Scrum Master workflow for writing user stories with clear acceptance criteria, story points, and task breakdowns.
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/bmad:sprint-planning</span>
+            <span>Sprint Planning</span>
+            <span class="expand-tag expand-tag-product">Product</span>
+          </summary>
+          <div class="expand-body">
+            Scrum Master workflow for sprint planning. Prioritises the backlog, assigns stories, and sets sprint goals.
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/bmad:dev-story</span>
+            <span>Developer Story</span>
+            <span class="expand-tag expand-tag-product">Product</span>
+          </summary>
+          <div class="expand-body">
+            Developer workflow for implementing a user story. Breaks the story into tasks, writes code, and validates against acceptance criteria.
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/bmad:research</span>
+            <span>Creative Research</span>
+            <span class="expand-tag expand-tag-product">Product</span>
+          </summary>
+          <div class="expand-body">
+            Creative Intelligence workflow for research. Explores market trends, user needs, competitive landscape, and innovation opportunities.
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/bmad:brainstorm</span>
+            <span>Brainstorming</span>
+            <span class="expand-tag expand-tag-product">Product</span>
+          </summary>
+          <div class="expand-body">
+            Creative Intelligence workflow for structured brainstorming sessions. Generates ideas, evaluates feasibility, and prioritises options.
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/bmad:solutioning-gate-check</span>
+            <span>Solution Gate Check</span>
+            <span class="expand-tag expand-tag-product">Product</span>
+          </summary>
+          <div class="expand-body">
+            System Architect workflow for validating solution designs before implementation. Checks feasibility, risks, and alignment with requirements.
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/bmad:create-workflow</span>
+            <span>Create Workflow</span>
+            <span class="expand-tag expand-tag-product">Product</span>
+          </summary>
+          <div class="expand-body">
+            Builder workflow for creating custom BMAD workflows. Design new processes tailored to your team's needs.
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/bmad:create-agent</span>
+            <span>Create Agent</span>
+            <span class="expand-tag expand-tag-product">Product</span>
+          </summary>
+          <div class="expand-body">
+            Builder workflow for creating custom agents. Design specialised agents for specific roles or tasks.
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/bmad:workflow-init</span>
+            <span>Initialise BMAD</span>
+            <span class="expand-tag expand-tag-product">Product</span>
+          </summary>
+          <div class="expand-body">
+            Set up the BMAD Method in your current project. Creates the folder structure, config files, and initial workflow templates.
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/bmad:workflow-status</span>
+            <span>Project Status</span>
+            <span class="expand-tag expand-tag-product">Product</span>
+          </summary>
+          <div class="expand-body">
+            Check project progress across all BMAD workflows. Shows what's done, what's in progress, and recommends next steps.
+          </div>
+        </details>
+      </div>
+
+      <div class="group-heading">
+        <div class="group-icon" style="background: var(--surface-2);">&#128295;</div>
+        Utility
+      </div>
+
+      <div class="expand-list">
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/commit</span>
+            <span>Git Commit</span>
+            <span class="expand-tag expand-tag-util">Utility</span>
+          </summary>
+          <div class="expand-body">
+            Analyse your changes and create a well-formatted git commit. Reviews diffs, writes a clear commit message, and handles staging.
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/refactor</span>
+            <span>Code Refactor</span>
+            <span class="expand-tag expand-tag-util">Utility</span>
+          </summary>
+          <div class="expand-body">
+            Deep codebase architecture audit and refactor planning. Analyses code structure, identifies tech debt, and creates a refactor plan.
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/find-skills</span>
+            <span>Find Skills</span>
+            <span class="expand-tag expand-tag-util">Utility</span>
+          </summary>
+          <div class="expand-body">
+            Discover and install new agent skills. Search by task, category, or keyword to find skills that extend Claude's capabilities.
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/test-suite-review</span>
+            <span>Test Suite Review</span>
+            <span class="expand-tag expand-tag-util">Utility</span>
+          </summary>
+          <div class="expand-body">
+            Audit test suites for common issues like implementation mirroring, type drift, tautological assertions, and mock integrity.
+          </div>
+        </details>
+
+        <details class="expand-item">
+          <summary>
+            <span class="expand-cmd">/keybindings-help</span>
+            <span>Keyboard Shortcuts</span>
+            <span class="expand-tag expand-tag-util">Utility</span>
+          </summary>
+          <div class="expand-body">
+            Customise keyboard shortcuts, rebind keys, add chord bindings, or modify your keybindings configuration.
+          </div>
+        </details>
+      </div>
+
+      <div class="tip tip-blue" style="margin-top: 16px;">
+        <div class="tip-icon">&#128161;</div>
+        <div class="tip-content">
+          <strong>You don't need to memorise these.</strong> Just ask what you need in plain English. Claude picks the right skill automatically. For data from Search Console or GA4, just ask &mdash; "How's our organic traffic this month?" or "Which pages aren't indexed?"
+        </div>
+      </div>
+    </section>
+
+    <section id="files">
+      <h2><span class="section-icon">&#128193;</span> What's in the Folder</h2>
+      <p class="lead">You don't need to touch these files &mdash; just handy to know they're there.</p>
+
+      <div class="terminal">
+        <div class="terminal-header">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <div class="terminal-title">Project structure</div>
+        </div>
+        <div class="terminal-body" style="line-height: 2;">
+          <span style="color: var(--accent);">your-project/</span><br>
+          &#9500;&#9472;&#9472; <span style="color: var(--text-muted);">guide.html</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># This guide</span><br>
+          &#9500;&#9472;&#9472; <span style="color: var(--text-muted);">README.md</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># Quick reference</span><br>
+          &#9492;&#9472;&#9472; <span style="color: var(--accent);">.claude/</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># Claude's brain</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&#9500;&#9472;&#9472; <span style="color: var(--amber);">CLAUDE.md</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># Project instructions</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&#9500;&#9472;&#9472; <span style="color: var(--text-muted);">clients/</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># Client briefs live here</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&#9500;&#9472;&#9472; <span style="color: var(--text-muted);">commands/</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&#9474;&nbsp;&nbsp;&nbsp;&#9492;&#9472;&#9472; <span style="color: var(--green);">commit.md</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># /commit command</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&#9492;&#9472;&#9472; <span style="color: var(--text-muted);">skills/</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># 7 custom skills (50+ installed via packs)</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#9500;&#9472;&#9472; <span style="color: var(--green);">client-brief/</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#9500;&#9472;&#9472; <span style="color: var(--green);">competitor-analysis/</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#9500;&#9472;&#9472; <span style="color: var(--green);">content-strategy/</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#9500;&#9472;&#9472; <span style="color: var(--green);">copywriting/</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#9500;&#9472;&#9472; <span style="color: var(--green);">page-cro/</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#9500;&#9472;&#9472; <span style="color: var(--green);">schema-markup/</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#9492;&#9472;&#9472; <span style="color: var(--green);">seo-audit/</span><br>
+        </div>
+      </div>
+
+      <div class="tip tip-blue">
+        <div class="tip-icon">&#128064;</div>
+        <div class="tip-content">
+          <strong>The .claude/ folder is hidden by default.</strong> That's normal &mdash; folders starting with a dot are hidden on Mac and Windows. You don't need to see it, but if you're curious: on Mac, open Finder, go to the project folder, and press <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>.</kbd> (all three keys at once) to show hidden files. Press the same keys again to hide them.
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>Built with Claude Code skills by Bruce. Need help? <a href="https://docs.anthropic.com/en/docs/claude-code">Claude Code docs</a></p>
+    </footer>
+
+  </main>
+</div>
+
+<script>
+  function toggleSidebar() {
+    document.querySelector('.sidebar').classList.toggle('open');
+    document.querySelector('.sidebar-overlay').classList.toggle('open');
+  }
+
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.sidebar nav a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(section => observer.observe(section));
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+        document.querySelector('.sidebar').classList.remove('open');
+        document.querySelector('.sidebar-overlay').classList.remove('open');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

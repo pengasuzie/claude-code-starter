@@ -1,0 +1,5 @@
+.DS_Store
+*.zip
+node_modules/
+.claude/product-marketing-context.md
+.claude/clients/
