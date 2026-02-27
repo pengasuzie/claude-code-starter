@@ -199,6 +199,10 @@ claude-code-marketing-kit/
 - Claude Code docs: https://docs.anthropic.com/en/docs/claude-code
 - Report issues: https://github.com/anthropics/claude-code/issues
 
+## Credits
+
+This kit includes the [BMAD Method](https://github.com/bmad-code-org/BMAD-METHOD) skills and commands for structured product development workflows. BMAD is MIT licensed, copyright (c) 2025 BMad Code, LLC.
+
 ## License
 
 MIT
