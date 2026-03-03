@@ -28,7 +28,7 @@ Look for `.claude/CLAUDE.md` in the current project root. Extract:
 - **Current focus**: What's being worked on right now?
 - **Next priorities / Roadmap**: What's planned but not yet built?
 - **Known gaps**: What's explicitly deprioritized or acknowledged as missing?
-- **Tech stack indicators**: What integrations exist (e.g., CargoWise, Google Sheets)?
+- **Tech stack indicators**: What integrations exist (e.g., Salesforce, Google Sheets)?
 
 **2b. Check recent git history** for development velocity and what's shipped recently:
 
